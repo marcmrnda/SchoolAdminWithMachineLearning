@@ -33,7 +33,7 @@ The system also:
 * Uses **stacked models** (RandomForest, Logistic Regression, XGBoost, Meta-Model).
 * Provides **explainability** with **LIME**.
 * Sends **automated welcome emails** to new users.
-* Generates **AI-driven explanations** of predictions via the Ollama API.
+* Generates **AI-driven explanations** of predictions via the Ollama `gemma:1b` model.
 
 ---
 
@@ -54,7 +54,7 @@ The system also:
 * **Backend:** Flask, Flask-SQLAlchemy, Flask-WTF, Flask-CORS
 * **Database:** SQLite (configurable via environment variables)
 * **Machine Learning:** Scikit-learn, XGBoost, LIME
-* **AI Integration:** Ollama (for natural language explanations)
+* **AI Integration:** Ollama (`gemma:1b`) for natural language explanations
 * **Emailing:** smtplib (SMTP with Gmail)
 * **Others:** Python-dotenv for config, bcrypt/werkzeug for password hashing
 
@@ -92,6 +92,15 @@ The system also:
    * `xg.pkl`
    * `training_columns.pkl`
    * `X_train_encoded.pkl`
+
+5. **Set up Ollama (`gemma:1b`)**
+   Install [Ollama](https://ollama.ai) and pull the model:
+
+   ```bash
+   ollama pull gemma:1b
+   ```
+
+   Keep Ollama running in the background.
 
 ---
 
@@ -131,17 +140,23 @@ Default endpoints:
 
 ## 🤖 Machine Learning Integration
 
-* **Models:** RandomForest, Logistic Regression, XGBoost combined via a meta-model.
-* **Explainability:** Predictions are explained with **LIME**.
-* **Report Generation:** AI-powered explanations are generated via Ollama’s `gemma3:1b`.
+* **Models Used for Prediction:**
 
-Example prediction workflow:
+  * RandomForest (`rf.pkl`)
+  * Logistic Regression (`lr.pkl`)
+  * XGBoost (`xg.pkl`)
+  * Meta-Model (`meta_model.pkl`)
+* **Explainability:** Predictions are explained using **LIME**.
+* **Natural Language Reports:**
+  After LIME explanations are generated, the system calls **Ollama’s `gemma:1b` model** to create a short, plain-English explanation of why the prediction was made.
 
-1. User registers with details.
-2. System encodes features → runs ML models → stacks results.
-3. Meta-model produces a final prediction & confidence.
-4. LIME explains contributions.
-5. Explanation report is generated and stored in the database.
+Example prediction flow:
+
+1. Student registers → system extracts features.
+2. Features are encoded and passed into stacked models.
+3. Final prediction + confidence score produced by meta-model.
+4. LIME explains feature contributions.
+5. **Ollama (`gemma:1b`) generates a human-readable summary.**
 
 ---
 
@@ -174,13 +189,14 @@ Example prediction workflow:
 * ❌ **Model files not found** → Ensure `.pkl` models are inside `app/AIMODEL/`.
 * ❌ **Email not sending** → Check Gmail App Password setup and `.env` credentials.
 * ❌ **Database not created** → Verify `DATABASE_URL` and run the app once to initialize.
+* ❌ **No Ollama explanation generated** → Ensure `ollama pull gemma:1b` has been run and Ollama is running.
 
 ---
 
 ## 👥 Contributors
 
-* Marc Miranda, Angel Malaluan, Ian Medina, Katrina Pasadilla, Kenneth Averion, Ameril Mampao
-* Contributions welcome via pull requests!
+* **Angel Malaluan**,**Marc Miranda**,**Ian Medina**,**Katrina Pasadilla**,**Kenneth Averion**,**Ameril Mampao**
+* **Also known as **Mikay's Angels****
 
 ---
 
@@ -188,3 +204,7 @@ Example prediction workflow:
 
 This project currently has **no license file**.
 To allow collaboration and usage, consider adding one (e.g., MIT, Apache 2.0).
+
+---
+
+Would you like me to also generate a ready-to-use **`.env.example` file** so you can add it directly to the repo?
