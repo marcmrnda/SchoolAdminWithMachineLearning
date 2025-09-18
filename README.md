@@ -206,5 +206,3 @@ This project currently has **no license file**.
 To allow collaboration and usage, consider adding one (e.g., MIT, Apache 2.0).
 
 ---
-
-Would you like me to also generate a ready-to-use **`.env.example` file** so you can add it directly to the repo?
