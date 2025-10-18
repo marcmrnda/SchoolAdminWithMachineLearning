@@ -1,4 +1,4 @@
-# 🧠 Smart Admission: Enrollment & Reenrollment Prediction System
+# 🧠 Smart Admission: Enrollment Prediction System
 
 A **Flask-based school administration system** enhanced with **machine learning** to predict a student's **enrollment or reenrollment likelihood**. The system manages user registration, authentication, and student records, while integrating predictive analytics (using stacking models and LIME explainability) to provide actionable insights into student commitment decisions.
 
