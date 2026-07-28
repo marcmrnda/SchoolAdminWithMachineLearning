@@ -215,10 +215,3 @@ Example prediction flow:
   * **Also known as Mikay's Angels**
 
 -----
-
-## 📜 License
-
-This project currently has **no license file**.
-To allow collaboration and usage, consider adding one (e.g., MIT, Apache 2.0).
-
------
